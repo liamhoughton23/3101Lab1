@@ -2,18 +2,29 @@
 
 
 
+int debug();
 int setUp();
 int switchStatement(int input);
 int inputint();
 float inputfloat();
+void backString();
+void getDate();
+
 
 
 
 
 int main(int argc, char *argv[]){
+
 	int input = setUp();
 	switchStatement(input);
 }
+
+
+
+
+
+
 
 
 int setUp(){
@@ -51,18 +62,25 @@ float inputfloat(){
 
 
 
+
+
+
+
 int switchStatement(int input){
 	switch(input){
 		case 1:
 			inputint();
 			break;
 		case 2:
-			iinputfloat();
+			inputfloat();
 			break;
 		case 3:
+			backString();
 			break;
 		case 4:
-
+			getDate();
+			break;
+		case 5:
 			break;
 
 
