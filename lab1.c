@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include <time.h>
 
 
 
@@ -10,9 +11,7 @@ float inputfloat();
 void backString();
 void getDate();
 
-
 int debug = 0;
-
 
 int main(int argc, char *argv[]){
 	if(argv[1] == NULL){
@@ -38,17 +37,11 @@ int main(int argc, char *argv[]){
 			switchStatement(input);
 		}
 	}
-
-
+	else{
+		return 1;
+	}
 	return 0;
 }
-
-
-
-
-
-
-
 
 int setUp(){
 	int input;
@@ -59,6 +52,9 @@ int setUp(){
 	fprintf(stderr, "4 - Output the current date and time\n");
 	fprintf(stderr, "5 - Exit\n");	
 	scanf("%d", &input);
+	if(debug == 1){
+		fprintf(stderr, "The input is: %d\n", input);
+	}
 	return input;
 }
 
@@ -66,8 +62,14 @@ int inputint(){
 	int num, num2;
 	fprintf(stderr, "Enter a number: ");
 	scanf("%d", &num);
+	if(debug == 1){
+		fprintf(stderr, "The first number is: %d\n", num);
+	}	
 	fprintf(stderr, "Enter a number: ");
 	scanf("%d",&num2);
+	if(debug == 1){
+		fprintf(stderr, "The second number is: %d\n", num2);
+	}
 	int result = num + num2;
 	fprintf(stderr, "Result is: %d\n", result);
 	return result;
@@ -76,9 +78,14 @@ float inputfloat(){
 	float num, num2;
 	fprintf(stderr, "Enter a number: ");
 	scanf("%f", &num);
+	if(debug == 1){
+		fprintf(stderr, "The first number is: %0.3f\n", num);
+	}	
 	fprintf(stderr, "Enter a number: ");
 	scanf("%f", &num2);
-	fprintf(stderr, "One: %f\nTwo: %f\n", num, num2);
+		if(debug == 1){
+		fprintf(stderr, "The second number is: %0.3f\n", num2);
+	}
 	float result = num * num2;
 	fprintf(stderr, "Product is %0.3f\n", result);
 	return result;
@@ -92,7 +99,9 @@ void backString(){
 	fprintf(stderr, "Enter a phrase: ");
 	fgets(phrase, 100, stdin);
 	phrase[strlen(phrase) - 1] = '\0';
-	fprintf(stderr, "The string is \"%s\"\n", phrase);
+	if(debug == 1){
+		fprintf(stderr, "The string is \"%s\"\n", phrase);
+	}
 	for(int i = strlen(phrase); i >= 0; i--){
 		fprintf(stderr,  "%c", phrase[i]);
 	}
@@ -102,13 +111,14 @@ void backString(){
 
 
 void getDate(){
-
+		time_t mytime;
+		mytime = time(NULL);
+		fprintf(stderr, "%s",ctime(&mytime));
 }
 
 
 
 int switchStatement(int input){
-	
 	switch(input){
 			case 1:
 				inputint();
