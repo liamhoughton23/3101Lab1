@@ -1,0 +1,106 @@
+Author: Liam Houghton
+
+
+	The program is a simple switch case program that allows the user to add two numbers, multiply two numbers, see a prase or word spelled backwards, 
+or see the date and time. The program is continuous until the user enters the indicator for exit, in this case the number is 5. There are 5 functions to 
+this program not including the main function. All functions except the getDate() funtion takes an argument that signals whether you are in debug mode or not. 
+This allows debug print statements to be displayed when you are in debug mode. The only funtion that has more than one argument is the 
+switchStatement(int input, int debug) function which takes in an input from the user indicating what function they want run. The user has to choose whether 
+they want to be in debug mode or no-debug mode. If the user does not indicate what type they want when inititalising the code, the program will stop and an 
+error message will occur telling them they have to specify which mode of the program they would like to run.   
+
+
+The menu will appear as followed when program is run:
+Choose from a list:
+1 - Add 2 numbers 
+2 - Multiply 2 numbers 
+3 - Read in string and reverse string as ouput.
+4 - Output the current date and time
+5 - Exit
+
+For the first two the user will be prompted to type two numbers and either the sum or the product will be printed.
+ 
+The third case will tell the user to type in a phrase or word and will print the phrase backwards.
+
+The fourth case will print the date and time from the computer.
+
+Functions:
+
+int main(int argc, char *argv[])
+	The first line declares the debug variable. Then there is a flag to check
+	if the user has chose debug mode or no-debug mode. If the user has not 
+	chose either of the two then the program is stopped and an error message 
+	prints telling to user they have to choose. Then there is the first if statement,
+	calling strcmp() to compare the string "debug" to the input argument in the command line.
+	If the result of that strcmp is 0, then the user has chosen debug mode. The menu is
+	printed and the input is taken in. The switchStatement() function is called and carried out 
+	based on the input. The process repeats through a while loop until the input is 5. 
+	The same logic is carried out on the else-if statement, but the program is not in debug mode.
+	If the spelling for debug/no-debug then the same error message is printed and the program is closed.  
+
+int setUp(int debug):
+	This functions purpose is to display the menu and take in the 
+	input from the user, if the program is in debug mode the input will 
+	be displayed after pressing enter. Returns the input
+
+int switchStatement(int input, int debug):
+	This is where the program is told what functions to run given the input
+	from the user. Returns 0.
+
+int inputint(int debug):
+	Takes the debug mode variable, so it knows if the program is in debug
+	mode or not. Starts by declaring two integers, num and num2. Then it
+	prompts the user for the first number and if the program is in debug mode
+	the number will be printed back out, does the same thing for the second
+	number. Then it adds the numbers and assigns the variable "result" to the 
+	sum of the two numbers. Then it prints out the sum of the two numbers. 
+	Returns the varaible "result."
+
+float inputfloat(int debug):
+	Basically the same logic as inputint(), but with floats instead of 
+	integers. When printing the floats it is programmed to print to a 0.000	
+	degree of accuracy. Returns result.
+
+void backString(int debug):
+	Takes in the debug argument. Declares a character array of 100. Then calls
+	the function getChar() to clear the buffer. The reason for this is when
+	mixing scanf() and fgets() the buffer is not clear, so calling getChar()
+	clears the buffer for fgets(). Then prompts the user for a phrase. Reads 
+	in the phrase and if in debug mode it will print the string. Then prints
+	the phrase backwards.
+
+void getdate()
+	Just prints the date and time from the computer.
+
+
+Files required:
+stdio.h - Standard for any C program
+string.h - This is for the strcmp() function.
+time.h - This is to print the date and time of the computer.
+
+
+Refactoring:
+
+For the main function:
+	Before I passed the debug variable into all of the functions, I had it as a global variable.  
+	When it comes to the strcmp() function, I could stored the value reurned into an integer then compared 
+	that value to 0 instead of just using the strcmp() function in the if statement directly. 
+ 
+For the setUp() function:
+	This function is not really needed arguably. If you wanted you could just put all of this in the main function.
+
+For both the intinput() and the intfloat() functions:
+	These functions could be void instead of returning the sum or product. Also we do not need to save the value into a varable.
+	If we wanted to we could just say: fprintf(stderr, "Result: %d", num + num2). 
+For the backString() function:
+	There are many ways to take in a string, using fgets() is just one of them. 
+
+There are many ways to complete this problem, I 
+		
+
+
+
+
+
+
+

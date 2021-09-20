@@ -2,50 +2,46 @@
 #include <string.h>
 #include <time.h>
 
-
-
-int setUp();
-int switchStatement(int input);
-int inputint();
-float inputfloat();
-void backString();
+int setUp(int debug);
+int switchStatement(int input, int debug);
+int inputint(int debug);
+float inputfloat(int debug);
+void backString(int debug);
 void getDate();
 
-int debug = 0;
-
 int main(int argc, char *argv[]){
+	int debug = 0;
 	if(argv[1] == NULL){
 		fprintf(stderr, "Error: Usage: %s [debug | no-debug]\n", argv[0]);
 		return 1;
 	}
-	int debugComp = strcmp("debug", argv[1]);
-	int nodebugComp = strcmp("no-debug", argv[1]);
-	if(debugComp == 0){
+	else if(strcmp("debug", argv[1]) == 0){
 		debug = 1;
-		int input = setUp();
-		switchStatement(input);
+		int input = setUp(debug);
+		switchStatement(input, debug);
 		while(input != 5){
-			input = setUp();
-			switchStatement(input);
+			input = setUp(debug);
+			switchStatement(input, debug);
 		}
 	}
-	else if(nodebugComp == 0){
-		int input = setUp();
-		switchStatement(input);
+	else if(strcmp("no-debug", argv[1]) == 0){
+		int input = setUp(debug);
+		switchStatement(input, debug);
 		while(input != 5){
-			input = setUp();
-			switchStatement(input);
+			input = setUp(debug);
+			switchStatement(input, debug);
 		}
 	}
 	else{
+		fprintf(stderr, "Error: Usage: %s [debug | no-debug]\n", argv[0]);
 		return 1;
 	}
 	return 0;
 }
 
-int setUp(){
+int setUp(int debug){
 	int input;
-	fprintf(stderr, "Enter the number and the following will happen:\n");
+	fprintf(stderr, "Choose from a list:\n");
 	fprintf(stderr, "1 - Add 2 numbers \n");
 	fprintf(stderr, "2 - Multiply 2 numbers \n");
 	fprintf(stderr, "3 - Read in string and reverse the string as output.\n");
@@ -58,7 +54,27 @@ int setUp(){
 	return input;
 }
 
-int inputint(){
+int switchStatement(int input, int debug){
+	switch(input){
+			case 1:
+				inputint(debug);
+				break;
+			case 2:
+				inputfloat(debug);
+				break;
+			case 3:
+				backString(debug);
+				break;
+			case 4:
+				getDate(debug);
+				break;
+			case 5:
+				break;
+	}
+	return 0;
+}
+
+int inputint(int debug){
 	int num, num2;
 	fprintf(stderr, "Enter a number: ");
 	scanf("%d", &num);
@@ -71,10 +87,10 @@ int inputint(){
 		fprintf(stderr, "The second number is: %d\n", num2);
 	}
 	int result = num + num2;
-	fprintf(stderr, "Result is: %d\n", result);
+	fprintf(stderr, "Sum is: %d\n", result);
 	return result;
 }
-float inputfloat(){
+float inputfloat(int debug){
 	float num, num2;
 	fprintf(stderr, "Enter a number: ");
 	scanf("%f", &num);
@@ -83,7 +99,7 @@ float inputfloat(){
 	}	
 	fprintf(stderr, "Enter a number: ");
 	scanf("%f", &num2);
-		if(debug == 1){
+	if(debug == 1){
 		fprintf(stderr, "The second number is: %0.3f\n", num2);
 	}
 	float result = num * num2;
@@ -93,7 +109,7 @@ float inputfloat(){
 
 
 
-void backString(){
+void backString(int debug){
 	char phrase[100];
 	getchar(); //to clear the buffer from scanf
 	fprintf(stderr, "Enter a phrase: ");
@@ -118,25 +134,7 @@ void getDate(){
 
 
 
-int switchStatement(int input){
-	switch(input){
-			case 1:
-				inputint();
-				break;
-			case 2:
-				inputfloat();
-				break;
-			case 3:
-				backString();
-				break;
-			case 4:
-				getDate();
-				break;
-			case 5:
-				break;
-	}
-	return 0;
-}
+
 
 
 
